@@ -8,9 +8,15 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.41.0/min/vs/loader.js"></script>
   <style>
-    /* VSC-Like Styling */
-body {
+   /* General Reset */
+* {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Layout */
+body {
     display: flex;
     height: 100vh;
     background-color: #1e1e1e;
@@ -64,20 +70,38 @@ body {
     background: #005f9e;
 }
 
-/* Code Editor */
+/* Centered Code Editor */
 .editor-container {
     flex: 1;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     height: 100vh;
     padding: 10px;
 }
 
-/* Output */
+/* Monaco Editor (Fullscreen in the center) */
+#editor {
+    width: 80%;
+    height: 70vh;  /* Makes it bigger */
+    border: 1px solid #333;
+}
+
+/* Output Section at the Bottom */
 .output-container {
-    width: 30%;
+    position: absolute;
+    bottom: 0;
+    left: 250px; /* Align with sidebar */
+    right: 0;
+    height: 30vh;
     background: #333;
     padding: 10px;
+    border-top: 2px solid #555;
+}
+
+.output-container h3 {
+    margin-bottom: 5px;
 }
 
 iframe {
@@ -86,6 +110,7 @@ iframe {
     border: none;
     background: white;
 }
+
 
   </style>
 </head>
@@ -115,7 +140,7 @@ iframe {
     </div>
 
     <script>
-      let editor;
+     let editor;
 let currentLanguage = "html";
 
 require.config({ paths: { vs: "https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.41.0/min/vs" } });
@@ -151,6 +176,8 @@ function runCode() {
     iframe.contentDocument.write(html + css + js);
     iframe.contentDocument.close();
 }
+
+
 
     </script>
 </body>
